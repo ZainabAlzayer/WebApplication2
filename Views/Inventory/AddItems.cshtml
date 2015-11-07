@@ -1,0 +1,52 @@
+﻿@model WebApplication2.Models.InventoryModel
+
+@{
+    ViewBag.Title = "AddItems";
+}
+
+<h2>AddItems</h2>
+<hr />
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css" href="∼/Content/Styles.css" />
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+
+
+        <p> Category:
+        
+            @Html.DropDownListFor(x => x.Category, new[] {
+                new SelectListItem() {Text = "Computer",
+                    Value = "1" },
+                new SelectListItem() {Text ="Laptop",
+                    Value = "2"},
+                 new SelectListItem() {Text ="Printer",
+                    Value = "3"}
+
+            }, "Choose an option")
+        </p>
+           
+
+
+        
+
+
+
+        <p>Name: @Html.TextBoxFor(x => x.Name) </p>
+        <p> CODE: @Html.TextBoxFor(x => x.Code)</p>
+        <p>
+            Descreption: @Html.TextBoxFor(x => x.Description )
+        </p>
+
+                <input type="submit" value=" Add" />
+    }
+</body>
+</html>

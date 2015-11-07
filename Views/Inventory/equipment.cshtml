@@ -1,0 +1,78 @@
+﻿@model WebApplication2.Models.InventoryModel
+
+@{
+    ViewBag.Title = "equipment";
+}
+
+<h2>equipment</h2>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+
+</head>
+ </br>
+
+
+<div>
+
+
+    <table class="table">
+
+        <tbody>
+
+            <tr>
+                <td>ID:</td>
+              <td>@ViewBag.ID</td>
+                <td></td>    
+            </tr>
+
+            <tr>
+
+                <td>Code:</td>
+
+                <td>@Model.Code</td>
+
+            </tr>
+
+            <tr>
+
+                <td>Name:</td>
+
+                <td>@Model.Name</td>
+
+            </tr>
+
+            <tr>
+
+
+                <td>Category:</td>
+
+                <td>@Model.Category</td>
+
+
+            </tr>
+
+            <tr>
+
+                <td>Description:<</td>
+
+                <td>@Model.Description</td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+    <a href="@Url.Action("Index","Inventory")" class="elements"> Back to Inventory </a>
+
+</div>
+
+
+
+
+</html>
