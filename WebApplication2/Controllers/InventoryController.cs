@@ -16,24 +16,19 @@ namespace WebApplication2.Controllers
         {
 
             List<InventoryModel> Inv = (List<InventoryModel>)HttpContext.Application["MyList"];
-           ViewBag.MyList = Inv;
+            ViewBag.MyList = Inv;
             return View();
         }
-
-
-
 
         public ViewResult equipment(int ID)
         {
             List<InventoryModel> Inv = (List<InventoryModel>)HttpContext.Application["MyList"];
             ViewBag.MyList = Inv;
-                 ViewBag.ID = ID;
+            ViewBag.ID = ID;
 
 
             return View();
         }
-
-
 
         public ActionResult LaptopIndex()
         {
@@ -92,8 +87,8 @@ namespace WebApplication2.Controllers
             List<InventoryModel> Inventorystore = (List<InventoryModel>)HttpContext.Application["MyList"];
             List<string> Catagory = (List<string>)HttpContext.Application["MyCategoryList"];
            
-            //   HttpContext.Application["Category_List"] = Catagory;
-           // ViewBag.Category_List = Catagory;
+             // HttpContext.Application["Category_List"] = Catagory;
+             // ViewBag.Category_List = Catagory;
 
 
 
@@ -109,20 +104,14 @@ namespace WebApplication2.Controllers
             List<string> CategoryList = (List<string>)HttpContext.Application["MyCategoryList"];
             CategoryList.Add(category);
          
-            return RedirectToAction("/Index", "Inventory");
-
-           
+            return RedirectToAction("/Index", "Inventory"); 
         }
-
-
 
         // add Items.
 
         [HttpGet]
         public ViewResult AddItems()
         {
-
-
 
             List<string> CategoryList = (List<string>)HttpContext.Application["MyCategoryList"];
             ViewBag.MyCategoryList = CategoryList;
