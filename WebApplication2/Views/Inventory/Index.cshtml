@@ -11,6 +11,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet"/>
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet"/>
+
     <style>
         table, th, td {
             border: 1px solid black;
@@ -37,12 +41,22 @@
             background-color: black;
             color: white;
         }
+
+        .btn a {
+            color: white
+        }
+
     </style>
+
 </head>
 <body>
 
-
-    <a href="@Url.Action("AddCAtegory","Inventory")" class="elements"> Add Category </a> | <a href="@Url.Action("AddItems","Inventory")" class="elements"> Add Equpments </a>
+    <div class="btn btn-primary">
+        <a href="@Url.Action("AddCAtegory","Inventory")" class="elements"> Add Category </a>
+    </div>
+    <div class="btn btn-primary">
+        <a href="@Url.Action("AddItems","Inventory")" class="elements"> Add Equpments </a>
+    </div>
 
 
     <table id="t01" style="width:100%">
@@ -71,15 +85,15 @@
                 
 
 
-                <td><a href="/Inventory/equipment/@List.ID" class="elements"> View </a></td>
+                <td>
+                    <div class="btn btn-info">
+                        <a href="/Inventory/equipment/@List.ID" class="elements"> View </a>
+                    </div>
+                </td>
 
             </tr>
 
         }
-
-
     </table>
-
-
 </body>
 </html>

@@ -4,6 +4,11 @@
     ViewBag.Title = "AddCategory";
 }
 
+<head>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-theme.css" rel="stylesheet" />
+</head>
+
 
 <h2>Add Category</h2>
 <hr/>
@@ -15,11 +20,10 @@
                     {
                          @Html.ValidationSummary()
                 
-                    <b>Add aCategory: </b>
+                    <b>Add a Category: </b>
                      @Html.TextBox("Category")
-            
-                     <input type = "submit" value="Add" />
-                 
+                    
+                     <button type = "submit" class="btn btn-success"> Add </button>  
      }
 
 </form>
