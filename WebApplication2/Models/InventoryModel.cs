@@ -17,8 +17,9 @@ namespace WebApplication2.Models
          public string Code { get; set; } 
         
          public string Description { get; set; } 
-         [Required(ErrorMessage = "Please select a valid category")] 
-
+         //[Required(ErrorMessage = "Please select a valid category")] 
+         //this isnt necessary since there is a dropdown list
+         
         public string Category { get; set; }
 
         [Required(ErrorMessage = "Please Enter Name!")]

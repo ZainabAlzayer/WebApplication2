@@ -5,11 +5,12 @@
 }
 
 @{
-    List<SelectListItem> category = new List<SelectListItem>();
-    foreach (var choice in ViewBag.MyCategoryList)
+    List<SelectListItem> list = new List<SelectListItem>();
+    foreach (var Item in ViewBag.MyCategoryList)
     {
-        category.Add(new SelectListItem()
-        { Value = choice,  Text = choice }); }
+        list.Add(new SelectListItem()
+        { Value = Item, Text = Item });
+    }
 };
 
 <h2>AddItems</h2>
@@ -32,25 +33,32 @@
             @Html.HiddenFor(x => x.ID)
         </P>
 
-    
-       
+
+
         <p>
-           
-           Category:
 
+            Category:
 
-            @Html.DropDownListFor(x => x.Category, category);
-            
+            <select name=" Category">
+
+                @foreach (var Item in ViewBag.MyCategoryList)
+                {
+                    <option value="@Item">
+                        @Item
+                    </option>}
+
+            </select>
+
         </p>
 
 
         <p>Name: @Html.TextBoxFor(x => x.Name) </p>
         <p> CODE: @Html.TextBoxFor(x => x.Code)</p>
         <p>
-            Descreption: @Html.TextBoxFor(x => x.Description )
+            Descreption: @Html.TextBoxFor(x => x.Description)
         </p>
 
-                <input type="submit" value=" Add" />
+        <button type="submit" class="btn btn-success"> Add </button>
     }
 </body>
 </html>
