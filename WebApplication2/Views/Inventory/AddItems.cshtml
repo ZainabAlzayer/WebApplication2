@@ -5,11 +5,11 @@
 }
 
 @{
-    List<SelectListItem> list = new List<SelectListItem>();
-    foreach (var Item in ViewBag.MyCategoryList)
+    List<SelectListItem> category = new List<SelectListItem>();
+    foreach (var choice in ViewBag.MyCategoryList)
     {
-        list.Add(new SelectListItem()
-        { Value = Item, Text = Item });
+        category.Add(new SelectListItem()
+        { Value = choice, Text = choice });
     }
 };
 
@@ -39,15 +39,8 @@
 
             Category:
 
-            <select name=" Category">
 
-                @foreach (var Item in ViewBag.MyCategoryList)
-                {
-                    <option value="@Item">
-                        @Item
-                    </option>}
-
-            </select>
+            @Html.DropDownListFor(x => x.Category, category);
 
         </p>
 
@@ -62,3 +55,54 @@
     }
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
