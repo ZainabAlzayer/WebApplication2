@@ -23,12 +23,11 @@ namespace WebApplication2.Controllers
 
 
 
-        public ViewResult equipment(int ID)
+        public ViewResult equipment(int id)
         {
-            List<InventoryModel> Inv = (List<InventoryModel>)HttpContext.Application["MyList"];
-            ViewBag.MyList = Inv;
-                 ViewBag.ID = ID;
-
+            
+                List<InventoryModel> Inv = (List<InventoryModel>)HttpContext.Application["MyList"];
+                ViewBag.Equipment = Inv[id-1];
 
             return View();
         }
@@ -90,10 +89,10 @@ namespace WebApplication2.Controllers
         {
 
             List<InventoryModel> Inventorystore = (List<InventoryModel>)HttpContext.Application["MyList"];
-            List<string> Catagory = (List<string>)HttpContext.Application["MyCategoryList"];
+            List<string> CategoryList = (List<string>)HttpContext.Application["MyCategoryList"];
            
             //   HttpContext.Application["Category_List"] = Catagory;
-           // ViewBag.Category_List = Catagory;
+            ViewBag.MyCategoryList = CategoryList;
 
 
 
@@ -124,25 +123,9 @@ namespace WebApplication2.Controllers
 
 
 
-            List<string> CategoryList = (List<string>)HttpContext.Application["MyCategoryList"];
-            ViewBag.MyCategoryList = CategoryList;
-
-            if (HttpContext.Application["MyCategoryList"] != null)
-            {
-                List<String> categorylist = (List<String>)HttpContext.Application["MyCategoryList"];
-                List<SelectListItem> select = new List<SelectListItem>();
-                foreach (var Item in categorylist)
-                {
-                    select.Add(new SelectListItem() { Value = Item, Text = Item });
-                }
-                     ViewBag.category = categorylist;
-                      ViewBag.SelectCategoryList = select; }
-  
-            else {  ViewBag.MyCategoryList = new List<String>();
-                ViewBag.MyDropDownList = new List<SelectListItem>(); }
-            
-            List<InventoryModel> Inv = (List<InventoryModel>)HttpContext.Application["MyList"];
             InventoryModel Inv2 = new InventoryModel();
+
+            List<InventoryModel> Inv = (List<InventoryModel>)HttpContext.Application["MyList"];
             int count = 0;
 
             foreach (var List in (List<InventoryModel>)HttpContext.Application["MyList"])
@@ -156,7 +139,20 @@ namespace WebApplication2.Controllers
 
             Inv2.ID = count;
 
-            
+            if (HttpContext.Application["MyCategoryList"] != null)
+            {
+                List<String> categorylist = (List<String>)HttpContext.Application["MyCategoryList"];
+                List<SelectListItem> select = new List<SelectListItem>();
+                foreach (var list in categorylist)
+                {
+                    select.Add(new SelectListItem() { Value = list, Text = list });
+                }
+                ViewBag.MyCategoryList = categorylist;
+            }
+            else
+            {
+                ViewBag.MyCategoryList = new List<String>();
+            }
 
             return View(Inv2);
         }
@@ -164,17 +160,20 @@ namespace WebApplication2.Controllers
         [HttpPost]
         public ViewResult AddItems(InventoryModel inventory)
         {
+            List<string>  category = (List<String>)HttpContext.Application["MyCategoryList"];
+            
+            ViewBag.MyCategoryList = category;
+
+           
+
 
             if (ModelState.IsValid)
            {
 
-                List<string> CategoryList = (List<string>)HttpContext.Application["MyCategoryList"];
-                ViewBag.MyCategoryList = CategoryList;
-
-
-                List<InventoryModel> Inv = (List<InventoryModel>)HttpContext.Application["MyList"];
+            
+               List<InventoryModel> Inv = (List<InventoryModel>)HttpContext.Application["MyList"];
                 Inv.Add(inventory);
-                ViewBag.MyList = Inv;
+               ViewBag.MyList = Inv;
 
 
                  return View("Index");
@@ -184,7 +183,7 @@ namespace WebApplication2.Controllers
 
             else
 
-               return View();
+               return View(inventory);
 
 
         }
