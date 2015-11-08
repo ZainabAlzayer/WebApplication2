@@ -59,12 +59,12 @@ namespace WebApplication2
            
 
 
-            List<string> categoryList = new List<string>();
-            categoryList.Add("Printer");
-            categoryList.Add("Laptop");
-            categoryList.Add("Computer");
+            List<string> CatList = new List<string>();
+            CatList.Add("Printer");
+            CatList.Add("Laptop");
+            CatList.Add("Computer");
 
-            Application["Category_List"] = categoryList;
+            Application["MyCategoryList"] = CatList;
 
 
 

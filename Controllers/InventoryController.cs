@@ -90,7 +90,10 @@ namespace WebApplication2.Controllers
         {
 
             List<InventoryModel> Inventorystore = (List<InventoryModel>)HttpContext.Application["MyList"];
-
+            List<string> Catagory = (List<string>)HttpContext.Application["MyCategoryList"];
+           
+            //   HttpContext.Application["Category_List"] = Catagory;
+           // ViewBag.Category_List = Catagory;
 
 
 
@@ -103,10 +106,12 @@ namespace WebApplication2.Controllers
         public ActionResult AddCategory(String category)
         {
 
-            List<string> Catagory_List = (List<string>)HttpContext.Application["Category_List"];
-            Catagory_List.Add(category);
+            List<string> CategoryList = (List<string>)HttpContext.Application["MyCategoryList"];
+            CategoryList.Add(category);
+         
+            return RedirectToAction("/Index", "Inventory");
 
-            return RedirectToAction("Index");
+           
         }
 
 
@@ -116,13 +121,44 @@ namespace WebApplication2.Controllers
         [HttpGet]
         public ViewResult AddItems()
         {
-            List<string> Category_List = (List<string>)HttpContext.Application["Category_List"];
-            ViewBag.Category_List = Category_List;
 
+
+
+            List<string> CategoryList = (List<string>)HttpContext.Application["MyCategoryList"];
+            ViewBag.MyCategoryList = CategoryList;
+
+            if (HttpContext.Application["MyCategoryList"] != null)
+            {
+                List<String> categorylist = (List<String>)HttpContext.Application["MyCategoryList"];
+                List<SelectListItem> select = new List<SelectListItem>();
+                foreach (var Item in categorylist)
+                {
+                    select.Add(new SelectListItem() { Value = Item, Text = Item });
+                }
+                     ViewBag.category = categorylist;
+                      ViewBag.SelectCategoryList = select; }
+  
+            else {  ViewBag.MyCategoryList = new List<String>();
+                ViewBag.MyDropDownList = new List<SelectListItem>(); }
+            
             List<InventoryModel> Inv = (List<InventoryModel>)HttpContext.Application["MyList"];
+            InventoryModel Inv2 = new InventoryModel();
+            int count = 0;
 
-        
-            return View();
+            foreach (var List in (List<InventoryModel>)HttpContext.Application["MyList"])
+            {
+                if (List.ID > count)
+                {
+                    count = List.ID;
+                }
+            }
+            count++;
+
+            Inv2.ID = count;
+
+            
+
+            return View(Inv2);
         }
 
         [HttpPost]
@@ -130,26 +166,25 @@ namespace WebApplication2.Controllers
         {
 
             if (ModelState.IsValid)
-            {
+           {
 
-                List<string> Category_List = (List<string>)HttpContext.Application["Category_List"];
-                ViewBag.Category_List = Category_List;
+                List<string> CategoryList = (List<string>)HttpContext.Application["MyCategoryList"];
+                ViewBag.MyCategoryList = CategoryList;
 
 
                 List<InventoryModel> Inv = (List<InventoryModel>)HttpContext.Application["MyList"];
-                ViewBag.ID = Inv[2].ID + 1 ;
                 Inv.Add(inventory);
                 ViewBag.MyList = Inv;
-                
 
 
+                 return View("Index");
 
 
-                return View("Index");
             }
+
             else
 
-                return View();
+               return View();
 
 
         }

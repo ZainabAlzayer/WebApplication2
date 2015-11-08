@@ -4,6 +4,13 @@
     ViewBag.Title = "AddItems";
 }
 
+@{
+    List<SelectListItem> list= new List<SelectListItem>();
+    foreach (var Item in ViewBag.MyCategoryList)
+    { list.Add(new SelectListItem()
+    { Value = Item, Text = Item }); }
+};
+
 <h2>AddItems</h2>
 <hr />
 
@@ -19,25 +26,28 @@
     {
         @Html.ValidationSummary()
 
+        <P>
+            ID: @Model.ID
+            @Html.HiddenFor(x => x.ID)
+        </P>
 
-
-        <p> Category:
-        
-            @Html.DropDownListFor(x => x.Category, new[] {
-                new SelectListItem() {Text = "Computer",
-                    Value = "1" },
-                new SelectListItem() {Text ="Laptop",
-                    Value = "2"},
-                 new SelectListItem() {Text ="Printer",
-                    Value = "3"}
-
-            }, "Choose an option")
-        </p>
+    
+       
+        <p>
            
+           Category:
+          
+     <select name=" Category">
 
-
-        
-
+       @foreach (var Item in ViewBag.MyCategoryList)
+         {
+          <option value="@Item">
+                   @Item
+              </option>}
+            
+            </select>
+                                
+        </p>
 
 
         <p>Name: @Html.TextBoxFor(x => x.Name) </p>
